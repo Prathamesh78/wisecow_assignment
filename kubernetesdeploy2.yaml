@@ -32,6 +32,6 @@ spec:
 
   type: NodePort
   ports:
-  - nodePort: 4499    
+  - nodePort: 31034    
     port: 4499
     targetPort: 4499
