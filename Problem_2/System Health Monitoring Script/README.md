@@ -38,4 +38,4 @@ This script monitors the health of a Linux system by checking CPU usage, memory 
    ```bash
    cat /var/log/system_health_monitor.log
    ```
-   ![image](https://github.com/user-attachments/assets/49793aff-b734-480f-a726-6485c2671331)
+   ![image](https://github.com/user-attachments/assets/a7ef6f34-fff8-409e-acf9-1690793cee50)
