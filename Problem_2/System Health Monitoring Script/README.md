@@ -28,7 +28,7 @@ This script monitors the health of a Linux system by checking CPU usage, memory 
    ```bash
    ./monitor_health.sh
    ```
-           OR
+   OR        
    ```bash
    */5 * * * * /path/to/monitor_health.sh
    ```
