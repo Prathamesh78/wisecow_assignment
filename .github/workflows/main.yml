@@ -1,0 +1,48 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    env:
+      DOCKERHUB_CREDENTIALS_USR: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_CREDENTIALS_PSW: ${{ secrets.DOCKERHUB_PASSWORD }}
+      KUBERNETES_HOST: ${{ secrets.KUBERNETES_HOST }}
+      KUBERNETES_USERNAME: ${{ secrets.KUBERNETES_USERNAME }}
+      KUBERNETES_PRIVATE_KEY: ${{ secrets.KUBERNETES_PRIVATE_KEY }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build Docker image
+      run: |
+        docker version
+        docker build -t prathamesh78/wisecow:${{ github.run_number }} .
+        docker image list
+        docker tag prathamesh78/wisecow:${{ github.run_number }} prathamesh78/wisecow:latest
+
+    - name: Log in to Docker Hub
+      run: echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+
+    - name: Push Docker image to Docker Hub
+      run: docker push prathamesh78/wisecow:latest
+
+    - name: Deploy to Kubernetes
+      uses: appleboy/ssh-action@v0.1.1
+      with:
+        host: ${{ secrets.KUBERNETES_HOST }}
+        username: ${{ secrets.KUBERNETES_USERNAME }}
+        script: |
+          kubectl apply -f kubernetesdeploy.yaml
