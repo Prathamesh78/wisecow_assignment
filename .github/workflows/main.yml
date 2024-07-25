@@ -44,5 +44,6 @@ jobs:
       with:
         host: ${{ secrets.KUBERNETES_HOST }}
         username: ${{ secrets.KUBERNETES_USERNAME }}
+        key: ${{ secrets.KUBERNETES_PRIVATE_KEY }}
         script: |
           kubectl apply -f kubernetesdeploy.yaml
