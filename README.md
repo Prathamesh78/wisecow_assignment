@@ -1,6 +1,6 @@
 ##Result
 
-1. I have deployed on kubernetes(1 master and 2 worker nodes) using Nodeport which is exposed at 31034
+1. I have deployed on kubernetes(1 master and 2 worker nodes) using Nodeport which is exposed at port number 31034
    
    ![image](https://github.com/user-attachments/assets/2be5f5c6-9e21-4e84-a940-735e9353be6a)
 
